@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://cuqivenufjquj"]
+
+[ext_resource type="Texture2D" uid="uid://eixdqy467csu" path="res://microgames/04_get_to_the_flag/cube_game/explosion/explosion.png" id="1_lksbu"]
+[ext_resource type="AudioStream" uid="uid://vfwsn8hx41aw" path="res://microgames/04_get_to_the_flag/cube_game/explosion/explosion.wav" id="2_6uy10"]
+[ext_resource type="Script" path="res://microgames/knight_game/explosion/explosion.gd" id="2_74stt"]
+
+[sub_resource type="Animation" id="Animation_r22mf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_atu6j"]
+resource_name = "explode"
+length = 0.85
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.85),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pykbe"]
+_data = {
+"RESET": SubResource("Animation_r22mf"),
+"explode": SubResource("Animation_atu6j")
+}
+
+[node name="Explosion" type="Sprite2D"]
+visible = false
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("1_lksbu")
+hframes = 16
+script = ExtResource("2_74stt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pykbe")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_6uy10")
+
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

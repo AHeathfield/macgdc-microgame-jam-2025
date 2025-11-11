@@ -1,0 +1,132 @@
+[gd_scene load_steps=16 format=3 uid="uid://ddhoio73023ba"]
+
+[ext_resource type="Script" path="res://scenes/main/bomb_timer/bomb_timer.gd" id="1_2j5o5"]
+[ext_resource type="Texture2D" uid="uid://cg8dqmgk5ksf5" path="res://scenes/main/bomb_timer/sprites/bomb_explode.png" id="2_tmimy"]
+[ext_resource type="Texture2D" uid="uid://ck805bj7jdo6a" path="res://scenes/main/bomb_timer/sprites/bomb_line.png" id="3_4et84"]
+[ext_resource type="Texture2D" uid="uid://cjxwc280obhyy" path="res://scenes/main/bomb_timer/sprites/bomb_head1.png" id="4_ow7td"]
+[ext_resource type="Texture2D" uid="uid://xhwg8ugymq6g" path="res://scenes/main/bomb_timer/sprites/bomb_head2.png" id="5_ahofm"]
+[ext_resource type="Texture2D" uid="uid://dodvapjg3g4pl" path="res://scenes/main/bomb_timer/sprites/bomb_flare1.png" id="6_er8ms"]
+[ext_resource type="Texture2D" uid="uid://bk3cbfgn1qemh" path="res://scenes/main/bomb_timer/sprites/bomb_flare2.png" id="7_c23tn"]
+[ext_resource type="Texture2D" uid="uid://ds16cq4urux2t" path="res://scenes/main/bomb_timer/sprites/bomb_letter1.png" id="8_2u1c3"]
+[ext_resource type="Texture2D" uid="uid://clriinsjisooa" path="res://scenes/main/bomb_timer/sprites/bomb_letter2.png" id="9_f44ri"]
+[ext_resource type="Texture2D" uid="uid://bbwlu07hjplk6" path="res://scenes/main/bomb_timer/sprites/bomb_letter3.png" id="10_5xxfv"]
+[ext_resource type="AudioStream" uid="uid://vk7yh5ni18l0" path="res://scenes/main/bomb_timer/sounds/tick.wav" id="11_lo4tt"]
+[ext_resource type="AudioStream" uid="uid://bpv8qogwtasmg" path="res://scenes/main/bomb_timer/sounds/tock.wav" id="12_hrw6x"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7vrph"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ow7td")
+}],
+"loop": true,
+"name": &"head1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ahofm")
+}],
+"loop": true,
+"name": &"head2",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g7654"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_er8ms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_c23tn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1crco"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_2u1c3")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_f44ri")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_5xxfv")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BombTimer" type="Node2D"]
+z_index = 100
+script = ExtResource("1_2j5o5")
+
+[node name="TickTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="BombExplode" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-22, -39)
+scale = Vector2(2, 2)
+texture = ExtResource("2_tmimy")
+
+[node name="BombLine" type="Line2D" parent="."]
+texture_filter = 1
+position = Vector2(-2.57627, 1)
+points = PackedVector2Array(0, 0, 587.576, 0)
+width = 6.0
+texture = ExtResource("3_4et84")
+texture_mode = 1
+joint_mode = 1
+
+[node name="BombHead" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-31, -12)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7vrph")
+animation = &"head1"
+
+[node name="BombFlare" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(599, -8)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_g7654")
+autoplay = "default"
+frame_progress = 0.287858
+
+[node name="Number" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-50, -55)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_1crco")
+
+[node name="Tick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_lo4tt")
+volume_db = -5.0
+
+[node name="Tock" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_hrw6x")
+volume_db = -5.0
+
+[connection signal="timeout" from="TickTimer" to="." method="_on_tick_timer_timeout"]
