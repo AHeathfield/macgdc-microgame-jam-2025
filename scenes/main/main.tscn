@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://fmxyb7nonwew" path="res://scenes/main/main.gd" id="1_c1cp2"]
 [ext_resource type="Texture2D" uid="uid://e4lvvaf2h0ca" path="res://scenes/main/sprites/door_left.png" id="3_1sdq5"]
+[ext_resource type="PackedScene" uid="uid://3i5s37pnwpwc" path="res://microgames/ZombieShooter/zombie_shooter.tscn" id="3_ouso4"]
 [ext_resource type="Texture2D" uid="uid://bjbil5iohc57a" path="res://scenes/main/sprites/room.png" id="3_y1h6j"]
 [ext_resource type="Texture2D" uid="uid://c577jxgsebcnh" path="res://scenes/main/sprites/control.png" id="4_gv218"]
 [ext_resource type="Texture2D" uid="uid://2p5ui5c44pt4" path="res://scenes/main/sprites/door_right.png" id="4_wfv2r"]
@@ -9,7 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://ctnvpdnbfg33b" path="res://scenes/main/sounds/music_win.wav" id="7_56n1x"]
 [ext_resource type="AudioStream" uid="uid://diam2nhqi5des" path="res://scenes/main/sounds/music_loss.wav" id="8_slq8a"]
 [ext_resource type="AudioStream" uid="uid://cfojwl07frk3h" path="res://scenes/main/sounds/music_next.wav" id="9_shbut"]
-[ext_resource type="PackedScene" uid="uid://blcsmx6jc2qwq" path="res://microgames/knight_game/knight_game.tscn" id="14_rofvo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ca068"]
 atlas = ExtResource("3_1sdq5")
@@ -1160,7 +1160,7 @@ _data = {
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c1cp2")
-microgames = Array[PackedScene]([ExtResource("14_rofvo")])
+microgames = Array[PackedScene]([ExtResource("3_ouso4")])
 
 [node name="Room" type="Node2D" parent="."]
 z_index = 4095
