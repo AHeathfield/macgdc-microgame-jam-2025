@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://3i5s37pnwpwc"]
+[gd_scene load_steps=11 format=3 uid="uid://3i5s37pnwpwc"]
 
 [ext_resource type="Script" uid="uid://cqwucx826k1ne" path="res://microgames/ZombieShooter/zombie_shooter.gd" id="1_7towe"]
 [ext_resource type="Script" uid="uid://defw17y5err6m" path="res://microgames/ZombieShooter/Scripts/player.gd" id="2_1rkq4"]
 [ext_resource type="PackedScene" uid="uid://ddhoio73023ba" path="res://scenes/main/bomb_timer/bomb_timer.tscn" id="2_pntch"]
+[ext_resource type="PackedScene" uid="uid://dtdul6ubbj3ow" path="res://microgames/ZombieShooter/Scenes/zombie.tscn" id="2_qfcj8"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_a21eq"]
 viewport_path = NodePath("SubViewport")
@@ -20,6 +21,9 @@ sky = SubResource("Sky_qfcj8")
 tonemap_mode = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qfcj8"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_pntch"]
+specular_color = Color(0, 1, 1, 1)
 
 [node name="ZombieShooter" type="Node2D" node_paths=PackedStringArray("bomb_timer")]
 process_mode = 1
@@ -55,6 +59,11 @@ environment = SubResource("Environment_4tfu3")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
+[node name="enemies" type="Node3D" parent="SubViewport/World"]
+
+[node name="Zombie" parent="SubViewport/World/enemies" instance=ExtResource("2_qfcj8")]
+transform = Transform3D(-0.14999999, 0, 1.3113416e-08, 0, 0.14999999, 0, -1.3113416e-08, 0, -0.14999999, 0, 0, -6.097643)
+
 [node name="player" type="CharacterBody3D" parent="SubViewport/World"]
 script = ExtResource("2_1rkq4")
 walking_speed = 5.0
@@ -68,6 +77,96 @@ shape = SubResource("CapsuleShape3D_qfcj8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport/World/player/head"]
+
+[node name="GUI" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="crosshair" type="Control" parent="SubViewport/GUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="up" type="TextureRect" parent="SubViewport/GUI/crosshair"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -5.0
+offset_right = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_pntch")
+
+[node name="down" type="TextureRect" parent="SubViewport/GUI/crosshair"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -5.0000153
+offset_right = 1.0
+offset_bottom = 5.0000153
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_pntch")
+
+[node name="left" type="TextureRect" parent="SubViewport/GUI/crosshair"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -0.9999962
+offset_right = 5.0
+offset_bottom = 0.9999962
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_pntch")
+
+[node name="right" type="TextureRect" parent="SubViewport/GUI/crosshair"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -0.9999962
+offset_right = 5.0
+offset_bottom = 0.9999962
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_pntch")
 
 [node name="BombTimer" parent="." instance=ExtResource("2_pntch")]
 position = Vector2(67, 354)
