@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=4 uid="uid://dtdul6ubbj3ow"]
+[gd_scene load_steps=23 format=4 uid="uid://dtdul6ubbj3ow"]
 
 [ext_resource type="Script" uid="uid://csrq6k2ikr8pu" path="res://microgames/ZombieShooter/Scripts/zombie.gd" id="1_8j5qa"]
 [ext_resource type="Material" uid="uid://dijdm7svt38f5" path="res://microgames/ZombieShooter/Assets/Material.001.tres" id="1_uxy1q"]
+[ext_resource type="AnimationLibrary" uid="uid://d2plomhj0pfaf" path="res://microgames/ZombieShooter/Assets/zombie_animations.glb" id="3_r5y2a"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_v1cvo"]
 resource_name = "zombie_test_Cube_001"
@@ -211,6 +212,33 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_r5y2a"]
 size = Vector3(8.048828, 16.522423, 2.8154297)
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r5y2a"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_173ip"]
+animation = &"zombie_animations/Attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_173ip"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dveh7"]
+advance_mode = 2
+advance_condition = &"attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xigsn"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dveh7"]
+states/End/position = Vector2(1045.5, 99.19375)
+states/Start/position = Vector2(177.5, 98.5)
+states/Walk/node = SubResource("AnimationNodeAnimation_r5y2a")
+states/Walk/position = Vector2(407.95477, 100.55)
+states/zombie_animations_Attack/node = SubResource("AnimationNodeAnimation_173ip")
+states/zombie_animations_Attack/position = Vector2(760.37964, 99.87187)
+transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition_173ip"), "Walk", "zombie_animations_Attack", SubResource("AnimationNodeStateMachineTransition_dveh7"), "zombie_animations_Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_xigsn")]
+graph_offset = Vector2(337.1246, -7.725)
+
 [node name="Zombie" type="CharacterBody3D"]
 script = ExtResource("1_8j5qa")
 
@@ -236,7 +264,7 @@ bones/2/parent = 1
 bones/2/rest = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.66569865, 0)
 bones/2/enabled = true
 bones/2/position = Vector3(0, 0.66569865, 0)
-bones/2/rotation = Quaternion(0.0029596612, 0, -0.042047944, 0.9991113)
+bones/2/rotation = Quaternion(0.043064665, -5.9529924e-12, 0.00089006184, 0.9990719)
 bones/2/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
 bones/3/name = "LeftArm.L"
 bones/3/parent = 2
@@ -250,7 +278,7 @@ bones/4/parent = 2
 bones/4/rest = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.49999976, 0)
 bones/4/enabled = true
 bones/4/position = Vector3(0, 0.49999976, 0)
-bones/4/rotation = Quaternion(0.17364001, -0.00083558116, 0.0006603507, 0.9848087)
+bones/4/rotation = Quaternion(0.17364477, -0.0003526146, 0.00027866816, 0.9848083)
 bones/4/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
 bones/5/name = "RightArm.R"
 bones/5/parent = 2
@@ -264,14 +292,14 @@ bones/6/parent = 1
 bones/6/rest = Transform3D(0.99999994, 0, 1.5099579e-07, 0, -0.99999994, 0, 1.5099579e-07, 0, -0.99999994, -0.24982609, -0.3381406, 0)
 bones/6/enabled = true
 bones/6/position = Vector3(-0.24982609, -0.3381406, 0)
-bones/6/rotation = Quaternion(0.9991603, 2.9695736e-08, 7.54345e-08, -0.04097417)
+bones/6/rotation = Quaternion(0.98500085, 7.668008e-09, 7.436548e-08, -0.17255007)
 bones/6/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
 bones/7/name = "RightLeg.R"
 bones/7/parent = 1
 bones/7/rest = Transform3D(0.99999994, 0, 1.5099579e-07, 0, -0.99999994, 0, 1.5099579e-07, 0, -0.99999994, 0.24982609, -0.3381406, 0)
 bones/7/enabled = true
 bones/7/position = Vector3(0.24982609, -0.3381406, 0)
-bones/7/rotation = Quaternion(0.9991603, -2.9695736e-08, 7.54345e-08, 0.04097417)
+bones/7/rotation = Quaternion(0.98500085, -7.668008e-09, 7.436548e-08, 0.17255007)
 bones/7/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
 
 [node name="Head" type="MeshInstance3D" parent="zombie/Skeleton3D"]
@@ -299,7 +327,7 @@ mesh = SubResource("ArrayMesh_mxbia")
 skin = SubResource("Skin_3yna1")
 
 [node name="Torso2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(3.9480655, 0.3328981, -0.0009861421, -0.3328981, 3.9479961, -0.023431957, -0.0009861421, 0.023431957, 3.9620063, 0, 8.232782, 0)
+transform = Transform3D(3.9620693, -0.0070464388, 0.00030373436, 0.0070464388, 3.9473736, -0.3409342, 0.00030373447, 0.3409342, 3.9473798, 0, 8.232782, 0)
 bone_name = "Torso"
 bone_idx = 2
 
@@ -310,7 +338,7 @@ transform = Transform3D(0.9999977, 4.6344798e-07, -4.947259e-09, -4.6344803e-07,
 shape = SubResource("BoxShape3D_orkfj")
 
 [node name="Head2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(3.948391, 0.30620554, -0.12037186, -0.32895198, 3.7024374, -1.3717835, 0.006466701, 1.3770394, 3.7150724, 0.16644898, 10.2067795, 0.011715973)
+transform = Transform3D(3.9620645, -0.009177471, 0.0003271215, 0.008459856, 3.5927174, -1.6704344, 0.00357265, 1.6704305, 3.5927277, -0.0035232177, 10.206469, 0.17046702)
 bone_name = "Head"
 bone_idx = 4
 
@@ -321,7 +349,7 @@ transform = Transform3D(0.9999925, -1.6298145e-09, -1.0011718e-08, -6.4028427e-0
 shape = SubResource("BoxShape3D_uxy1q")
 
 [node name="LeftArm2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(-3.9480653, 0.0009862592, -0.33289868, 0.33289868, 0.023433367, -3.9479957, 0.0009861474, -3.9620059, -0.023433372, -2.8775992, 10.454515, 0.0124234585)
+transform = Transform3D(-3.962069, -0.00030373866, 0.007045837, -0.00704584, 0.34093556, -3.947373, -0.00030368095, -3.947379, -0.34093556, -3.057602, 10.192164, 0.16946661)
 bone_name = "LeftArm.L"
 bone_idx = 3
 
@@ -332,7 +360,7 @@ transform = Transform3D(1, -4.9360096e-08, -4.0745363e-10, 5.5879354e-08, 1, -2.
 shape = SubResource("BoxShape3D_8j5qa")
 
 [node name="RightArm2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(-3.9480653, 0.0009862607, -0.33289748, 0.33289748, 0.023433367, -3.9479957, 0.0009861388, -3.9620059, -0.023433372, 3.2090006, 9.941298, 0.010903156)
+transform = Transform3D(-3.962069, -0.0003037372, 0.007047032, -0.00704703, 0.34093556, -3.947373, -0.0003037852, -3.947379, -0.34093556, 3.0505872, 10.203028, 0.16993487)
 bone_name = "RightArm.R"
 bone_idx = 5
 
@@ -343,7 +371,7 @@ transform = Transform3D(1, -4.9360096e-08, -4.0745363e-10, 5.5879354e-08, 1, -2.
 shape = SubResource("BoxShape3D_8j5qa")
 
 [node name="LeftLeg2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(3.9620757, 2.5960836e-07, 5.876106e-07, 2.1062338e-07, -3.9487724, 0.32441285, 6.068941e-07, -0.32441285, -3.9487724, -0.98982996, 4.2554946, 0)
+transform = Transform3D(3.9620757, 1.6153193e-07, 5.699599e-07, -4.182981e-08, -3.7261462, 1.3468041, 5.9092906e-07, -1.3468041, -3.7261462, -0.98982996, 4.2554946, 0)
 bone_name = "LeftLeg.L"
 bone_idx = 6
 
@@ -354,7 +382,7 @@ transform = Transform3D(1, -4.9360096e-08, -4.0745363e-10, 5.5879354e-08, 1, -2.
 shape = SubResource("BoxShape3D_8j5qa")
 
 [node name="RightLeg2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(3.9620757, -2.5960836e-07, 5.876106e-07, -2.1062338e-07, -3.9487724, -0.32441285, 6.068941e-07, 0.32441285, -3.9487724, 0.98982996, 4.2554946, 0)
+transform = Transform3D(3.9620757, -1.6153193e-07, 5.699599e-07, 4.182981e-08, -3.7261462, -1.3468041, 5.9092906e-07, 1.3468041, -3.7261462, 0.98982996, 4.2554946, 0)
 bone_name = "RightLeg.R"
 bone_idx = 7
 
@@ -366,7 +394,8 @@ shape = SubResource("BoxShape3D_8j5qa")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="zombie"]
 libraries = {
-&"": SubResource("AnimationLibrary_cgoew")
+&"": SubResource("AnimationLibrary_cgoew"),
+&"zombie_animations": ExtResource("3_r5y2a")
 }
 autoplay = "Walk"
 
@@ -376,3 +405,9 @@ path_height_offset = 0.5
 [node name="EnvCollisionBox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.185528, 0)
 shape = SubResource("BoxShape3D_r5y2a")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../zombie")
+tree_root = SubResource("AnimationNodeStateMachine_dveh7")
+anim_player = NodePath("../zombie/AnimationPlayer")
+parameters/conditions/attack = false
