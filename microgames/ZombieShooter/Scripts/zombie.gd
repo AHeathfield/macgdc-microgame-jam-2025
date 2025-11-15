@@ -2,19 +2,20 @@ extends CharacterBody3D
 
 @export var player : CharacterBody3D
 @export var speed : float = 5.0
-@export var attack_range : float = 2.5
 
 @onready var nav_agent = $NavigationAgent3D
 @onready var animation_tree = $AnimationTree
 
 var state_machine
+var left_arm_colliding : bool = false
+var right_arm_colliding : bool = false
 
 func _ready() -> void:
 	state_machine = animation_tree.get("parameters/playback")
 
 
 # Physics process is better for things that have physics aka collision since it relies on a set physics framerate (i.e. 60fps)
-func _physics_process(_delta) -> void:
+func _physics_process(delta) -> void:
 	velocity = Vector3.ZERO
 	
 	match state_machine.get_current_node():
@@ -27,7 +28,8 @@ func _physics_process(_delta) -> void:
 			
 			# Looking in direction zombie moves
 			if velocity != Vector3.ZERO:
-				look_at(Vector3(global_position.x + velocity.x, global_position.y + velocity.y, global_position.z + velocity.z), Vector3.UP)
+				rotation.y = lerp_angle(rotation.y, atan2(-velocity.x, -velocity.z), delta * 5)
+				#look_at(Vector3(global_position.x + velocity.x, global_position.y + velocity.y, global_position.z + velocity.z), Vector3.UP)
 		"Attack":
 			# Looking at player when attacking
 			# keeping the y rotation same as zombie since it may mess up if looking at player
@@ -42,4 +44,27 @@ func _physics_process(_delta) -> void:
 
 
 func _player_in_range() -> bool:
-	return global_position.distance_to(player.global_position) <= attack_range
+	return left_arm_colliding or right_arm_colliding
+
+
+func _hit_finished() -> void:
+	if left_arm_colliding or right_arm_colliding:
+		var dir = global_position.direction_to(player.global_position)
+		player.hit(dir)
+
+
+func _on_left_arm_area_3d_body_entered(body):
+	if body.is_in_group("player"):
+		left_arm_colliding = true
+
+func _on_left_arm_area_3d_body_exited(body):
+	if body.is_in_group("player"):
+		left_arm_colliding = false
+
+func _on_right_arm_area_3d_body_entered(body):
+	if body.is_in_group("player"):
+		right_arm_colliding = true
+
+func _on_right_arm_area_3d_body_exited(body):
+	if body.is_in_group("player"):
+		right_arm_colliding = false

@@ -1,8 +1,8 @@
-[gd_scene load_steps=23 format=4 uid="uid://dtdul6ubbj3ow"]
+[gd_scene load_steps=24 format=4 uid="uid://dtdul6ubbj3ow"]
 
 [ext_resource type="Script" uid="uid://csrq6k2ikr8pu" path="res://microgames/ZombieShooter/Scripts/zombie.gd" id="1_8j5qa"]
 [ext_resource type="Material" uid="uid://dijdm7svt38f5" path="res://microgames/ZombieShooter/Assets/Material.001.tres" id="1_uxy1q"]
-[ext_resource type="AnimationLibrary" uid="uid://d2plomhj0pfaf" path="res://microgames/ZombieShooter/Assets/zombie_animations.glb" id="3_r5y2a"]
+[ext_resource type="Animation" uid="uid://dqlhpn17hstxk" path="res://microgames/ZombieShooter/Assets/zombie_attack.res" id="3_r5y2a"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_v1cvo"]
 resource_name = "zombie_test_Cube_001"
@@ -209,11 +209,16 @@ _data = {
 &"Walk": SubResource("Animation_ihivq")
 }
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_173ip"]
+_data = {
+&"zombie_attack": ExtResource("3_r5y2a")
+}
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_r5y2a"]
-size = Vector3(8.048828, 16.522423, 2.8154297)
+size = Vector3(1.2658691, 2.508437, 0.26660156)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_173ip"]
-animation = &"zombie_animations/Attack"
+animation = &"Zombie/zombie_attack"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r5y2a"]
 animation = &"Walk"
@@ -235,18 +240,19 @@ advance_condition = &"walk"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dveh7"]
 states/Attack/node = SubResource("AnimationNodeAnimation_173ip")
-states/Attack/position = Vector2(760.37964, 99.87187)
+states/Attack/position = Vector2(760.37964, 99.53281)
 states/End/position = Vector2(1045.5, 99.19375)
 states/Start/position = Vector2(177.5, 98.5)
 states/Walk/node = SubResource("AnimationNodeAnimation_r5y2a")
 states/Walk/position = Vector2(407.95477, 100.55)
 transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition_173ip"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_dveh7"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_xigsn")]
-graph_offset = Vector2(148.33434, -27.037498)
+graph_offset = Vector2(42.1336, -39.959995)
 
 [node name="Zombie" type="CharacterBody3D"]
 script = ExtResource("1_8j5qa")
 
 [node name="zombie" type="Node3D" parent="."]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="zombie"]
 bones/0/name = "Armature"
@@ -268,7 +274,7 @@ bones/2/parent = 1
 bones/2/rest = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.66569865, 0)
 bones/2/enabled = true
 bones/2/position = Vector3(0, 0.66569865, 0)
-bones/2/rotation = Quaternion(0.017317807, 0, 0.033199254, 0.9992988)
+bones/2/rotation = Quaternion(0.04313364, 2.5491111e-11, 0.0040535345, 0.9990611)
 bones/2/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
 bones/3/name = "LeftArm.L"
 bones/3/parent = 2
@@ -282,7 +288,7 @@ bones/4/parent = 2
 bones/4/rest = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.49999976, 0)
 bones/4/enabled = true
 bones/4/position = Vector3(0, 0.49999976, 0)
-bones/4/rotation = Quaternion(0.17364575, -0.00025394358, 0.00020068933, 0.9848082)
+bones/4/rotation = Quaternion(0.17364813, -1.0355653e-05, 8.18398e-06, 0.98480785)
 bones/4/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
 bones/5/name = "RightArm.R"
 bones/5/parent = 2
@@ -296,14 +302,14 @@ bones/6/parent = 1
 bones/6/rest = Transform3D(0.99999994, 0, 1.5099579e-07, 0, -0.99999994, 0, 1.5099579e-07, 0, -0.99999994, -0.24982609, -0.3381406, 0)
 bones/6/enabled = true
 bones/6/position = Vector3(-0.24982609, -0.3381406, 0)
-bones/6/rotation = Quaternion(0.9943552, -1.8463801e-08, 7.5071725e-08, -0.10610278)
+bones/6/rotation = Quaternion(0.98497677, -3.27095e-08, 7.436367e-08, 0.17268725)
 bones/6/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
 bones/7/name = "RightLeg.R"
 bones/7/parent = 1
 bones/7/rest = Transform3D(0.99999994, 0, 1.5099579e-07, 0, -0.99999994, 0, 1.5099579e-07, 0, -0.99999994, 0.24982609, -0.3381406, 0)
 bones/7/enabled = true
 bones/7/position = Vector3(0.24982609, -0.3381406, 0)
-bones/7/rotation = Quaternion(0.9943552, 1.8463801e-08, 7.5071725e-08, 0.10610278)
+bones/7/rotation = Quaternion(0.98497677, 3.27095e-08, 7.436367e-08, -0.17268725)
 bones/7/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
 
 [node name="Head" type="MeshInstance3D" parent="zombie/Skeleton3D"]
@@ -331,7 +337,7 @@ mesh = SubResource("ArrayMesh_mxbia")
 skin = SubResource("Skin_3yna1")
 
 [node name="Torso2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(3.953342, -0.26289138, 0.004555897, 0.26289138, 3.9509652, -0.13713267, 0.004555897, 0.13713267, 3.9596992, 0, 8.232782, 0)
+transform = Transform3D(3.9619455, -0.03209066, 0.0013854881, 0.03209066, 3.9472024, -0.34147656, 0.0013854876, 0.34147656, 3.9473329, 0, 8.232782, 0)
 bone_name = "Torso"
 bone_idx = 2
 
@@ -342,7 +348,7 @@ transform = Transform3D(0.9999977, 4.6344798e-07, -4.947259e-09, -4.6344803e-07,
 shape = SubResource("BoxShape3D_orkfj")
 
 [node name="Head2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(3.9532626, -0.24739066, 0.092492275, 0.26402643, 3.6656704, -1.4802673, 0.0068545174, 1.4831386, 3.6740026, -0.13144563, 10.208264, 0.06856631)
+transform = Transform3D(3.9619448, -0.029759604, 0.012208032, 0.032132152, 3.5923645, -1.670906, 0.0014814956, 1.6709499, 3.5924878, -0.016045323, 10.206383, 0.1707382)
 bone_name = "Head"
 bone_idx = 4
 
@@ -353,29 +359,29 @@ transform = Transform3D(0.9999925, -1.6298145e-09, -1.0011718e-08, -6.4028427e-0
 shape = SubResource("BoxShape3D_uxy1q")
 
 [node name="LeftArm2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(-3.9533417, -0.0045559923, 0.26289076, -0.26289076, 0.13713408, -3.9509647, -0.0045558736, -3.9596987, -0.13713408, -3.178222, 9.996738, 0.06474625)
+transform = Transform3D(-3.9619453, -0.0013855012, 0.032090057, -0.032090057, 0.34147793, -3.9472017, -0.0013854338, -3.9473321, -0.34147793, -3.0699723, 10.172774, 0.16890272)
 bone_name = "LeftArm.L"
 bone_idx = 3
 
-[node name="Area3D" type="Area3D" parent="zombie/Skeleton3D/LeftArm2"]
+[node name="LeftArmArea3D" type="Area3D" parent="zombie/Skeleton3D/LeftArm2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="zombie/Skeleton3D/LeftArm2/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="zombie/Skeleton3D/LeftArm2/LeftArmArea3D"]
 transform = Transform3D(1, -4.9360096e-08, -4.0745363e-10, 5.5879354e-08, 1, -2.8312206e-07, -2.7823262e-08, -2.8312206e-07, 1.0000001, 0.0023198724, 0.5584228, 0.012486935)
 shape = SubResource("BoxShape3D_8j5qa")
 
 [node name="RightArm2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(-3.9533417, -0.004555991, 0.26289195, -0.26289195, 0.13713408, -3.9509647, -0.0045559164, -3.9596987, -0.13713408, 2.9165123, 10.402029, 0.07176993)
+transform = Transform3D(-3.9619453, -0.0013854998, 0.03209125, -0.03209125, 0.34147793, -3.9472017, -0.0013855384, -3.9473321, -0.34147793, 3.038026, 10.222248, 0.17103869)
 bone_name = "RightArm.R"
 bone_idx = 5
 
-[node name="Area3D" type="Area3D" parent="zombie/Skeleton3D/RightArm2"]
+[node name="RightArmArea3D" type="Area3D" parent="zombie/Skeleton3D/RightArm2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="zombie/Skeleton3D/RightArm2/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="zombie/Skeleton3D/RightArm2/RightArmArea3D"]
 transform = Transform3D(1, -4.9360096e-08, -4.0745363e-10, 5.5879354e-08, 1, -2.8312206e-07, -2.7823262e-08, -2.8312206e-07, 1.0000001, 0.0023198724, 0.5584228, 0.012486935)
 shape = SubResource("BoxShape3D_8j5qa")
 
 [node name="LeftLeg2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(3.9620757, -8.2365666e-08, 6.0704554e-07, -2.0860244e-07, -3.8728669, 0.83602834, 5.759978e-07, -0.83602834, -3.8728669, -0.98982996, 4.2554946, 0)
+transform = Transform3D(3.9620757, -3.570603e-07, 5.356565e-07, -1.5354183e-07, -3.7257707, -1.347842, 6.251759e-07, 1.347842, -3.7257707, -0.98982996, 4.2554946, 0)
 bone_name = "LeftLeg.L"
 bone_idx = 6
 
@@ -386,7 +392,7 @@ transform = Transform3D(1, -4.9360096e-08, -4.0745363e-10, 5.5879354e-08, 1, -2.
 shape = SubResource("BoxShape3D_8j5qa")
 
 [node name="RightLeg2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(3.9620757, 8.2365666e-08, 6.0704554e-07, 2.0860244e-07, -3.8728669, -0.83602834, 5.759978e-07, 0.83602834, -3.8728669, 0.98982996, 4.2554946, 0)
+transform = Transform3D(3.9620757, 3.570603e-07, 5.356565e-07, 1.5354183e-07, -3.7257707, 1.347842, 6.251759e-07, -1.347842, -3.7257707, 0.98982996, 4.2554946, 0)
 bone_name = "RightLeg.R"
 bone_idx = 7
 
@@ -399,7 +405,7 @@ shape = SubResource("BoxShape3D_8j5qa")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="zombie"]
 libraries = {
 &"": SubResource("AnimationLibrary_cgoew"),
-&"zombie_animations": ExtResource("3_r5y2a")
+&"Zombie": SubResource("AnimationLibrary_173ip")
 }
 autoplay = "Walk"
 
@@ -407,7 +413,7 @@ autoplay = "Walk"
 path_height_offset = 0.5
 
 [node name="EnvCollisionBox" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.185528, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0726622, 0)
 shape = SubResource("BoxShape3D_r5y2a")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -416,3 +422,8 @@ tree_root = SubResource("AnimationNodeStateMachine_dveh7")
 anim_player = NodePath("../zombie/AnimationPlayer")
 parameters/conditions/attack = false
 parameters/conditions/walk = false
+
+[connection signal="body_entered" from="zombie/Skeleton3D/LeftArm2/LeftArmArea3D" to="." method="_on_left_arm_area_3d_body_entered"]
+[connection signal="body_exited" from="zombie/Skeleton3D/LeftArm2/LeftArmArea3D" to="." method="_on_left_arm_area_3d_body_exited"]
+[connection signal="body_entered" from="zombie/Skeleton3D/RightArm2/RightArmArea3D" to="." method="_on_right_arm_area_3d_body_entered"]
+[connection signal="body_exited" from="zombie/Skeleton3D/RightArm2/RightArmArea3D" to="." method="_on_right_arm_area_3d_body_exited"]

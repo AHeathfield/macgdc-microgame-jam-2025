@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://3i5s37pnwpwc"]
+[gd_scene load_steps=11 format=3 uid="uid://3i5s37pnwpwc"]
 
 [ext_resource type="Script" uid="uid://cqwucx826k1ne" path="res://microgames/ZombieShooter/zombie_shooter.gd" id="1_7towe"]
 [ext_resource type="PackedScene" uid="uid://ddhoio73023ba" path="res://scenes/main/bomb_timer/bomb_timer.tscn" id="2_pntch"]
-[ext_resource type="PackedScene" uid="uid://dtdul6ubbj3ow" path="res://microgames/ZombieShooter/Scenes/zombie.tscn" id="2_qfcj8"]
 [ext_resource type="PackedScene" uid="uid://bitot6q3psgra" path="res://microgames/ZombieShooter/Scenes/player.tscn" id="3_1rkq4"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_a21eq"]
@@ -36,6 +35,8 @@ game_name = "Zombie Shooter"
 creator_name = "Aidan"
 game_description = "Don't let the zombies kill you."
 game_length = 10
+message = "Survive!"
+control_type = 2
 bomb_timer = NodePath("BombTimer")
 
 [node name="WorldView" type="Sprite2D" parent="."]
@@ -73,26 +74,30 @@ environment = SubResource("Environment_4tfu3")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="enemies" type="Node3D" parent="SubViewport/World"]
+[node name="spawners" type="Node3D" parent="SubViewport/World"]
 
-[node name="Zombie" parent="SubViewport/World/enemies" node_paths=PackedStringArray("player") instance=ExtResource("2_qfcj8")]
-transform = Transform3D(-0.14999999, 0, 1.3113416e-08, 0, 0.14999999, 0, -1.3113416e-08, 0, -0.14999999, 0, 0, -6.097643)
-player = NodePath("../../player")
-speed = 2.0
+[node name="spawner" type="Node3D" parent="SubViewport/World/spawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.3088, 0, -9.287796)
+
+[node name="spawner2" type="Node3D" parent="SubViewport/World/spawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.92165, 0, -9.287796)
+
+[node name="spawner3" type="Node3D" parent="SubViewport/World/spawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.92165, 0, 8.999489)
+
+[node name="spawner4" type="Node3D" parent="SubViewport/World/spawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.985205, 0, 8.999489)
+
+[node name="SpawnTimer" type="Timer" parent="SubViewport/World"]
+autostart = true
 
 [node name="player" parent="SubViewport/World" groups=["player"] instance=ExtResource("3_1rkq4")]
 
 [node name="GUI" type="Control" parent="SubViewport"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -172,5 +177,16 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_pntch")
 
+[node name="HitOverlay" type="ColorRect" parent="SubViewport/GUI"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(17, 17)
+color = Color(0.84263474, 3.5616756e-06, 4.813075e-07, 0.3764706)
+
 [node name="BombTimer" parent="." instance=ExtResource("2_pntch")]
 position = Vector2(67, 354)
+
+[connection signal="timeout" from="SubViewport/World/SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="player_hit" from="SubViewport/World/player" to="." method="_on_player_player_hit"]

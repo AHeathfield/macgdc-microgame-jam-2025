@@ -1,13 +1,23 @@
 extends Microgame
 
+@export var hit_duration : float = 0.5
+
 @onready var player: CharacterBody3D = $SubViewport/World/player
+@onready var hit_overlay = $SubViewport/GUI/HitOverlay
+@onready var nav_region_3d = $SubViewport/World/NavigationRegion3D
+@onready var spawners = $SubViewport/World/spawners
+
+var zombie = load("res://microgames/ZombieShooter/Scenes/zombie.tscn")
+var zombie_inst
 
 func _ready() -> void:
 	super()
 	set_process_unhandled_input(true)
+	randomize() # Creates seed for random number generator
 
 
 # Because of the subview port, input events like this need to be handled here
+# Basically this will send down the event to the player node so I can just keep the logic there
 func _input(event):
 	# fix by ArdaE https://github.com/godotengine/godot/issues/17326#issuecomment-431186323
 	if event is InputEventMouse:
@@ -18,7 +28,7 @@ func _input(event):
 		player.unhandled_input(event)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	var we_won := false
 	var we_lost := false
@@ -29,3 +39,22 @@ func _process(delta: float) -> void:
 	
 	if we_lost:
 		lose_game.emit()
+
+
+func _get_random_child(parent_node):
+	var random_id = randi() % parent_node.get_child_count()
+	return parent_node.get_child(random_id)
+
+
+func _on_player_player_hit():
+	hit_overlay.visible = true
+	await get_tree().create_timer(hit_duration).timeout
+	hit_overlay.visible = false
+
+
+func _on_spawn_timer_timeout():
+	var spawn_point = _get_random_child(spawners).global_position
+	zombie_inst = zombie.instantiate()
+	zombie_inst.position = spawn_point
+	zombie_inst.player = player
+	nav_region_3d.add_child(zombie_inst)

@@ -1,14 +1,19 @@
 extends CharacterBody3D
 
-@export var walking_speed : float
+@export var walk_speed : float = 5.0
 @export var mouse_sens : float = 0.4
 ## This adds a gradual increase and decrease to movement speed
 @export var lerp_speed : float = 15.0
+@export var hit_stagger : float = 5.0
+
 
 @onready var head = $head
 
-var current_speed = 5.0
+# signals
+signal player_hit
+
 var jump_velocity = 4.5
+var hit_velocity : Vector3 = Vector3.ZERO
 var direction : Vector3 = Vector3.ZERO
 
 func _ready() -> void:
@@ -48,10 +53,23 @@ func _physics_process(delta: float) -> void:
 	# See lerp_speed for desc
 	direction = lerp(direction, (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), delta*lerp_speed)
 	if direction:
-		velocity.x = direction.x * current_speed
-		velocity.z = direction.z * current_speed
+		velocity.x = direction.x * walk_speed
+		velocity.z = direction.z * walk_speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, current_speed)
-		velocity.z = move_toward(velocity.z, 0, current_speed)
-
+		velocity.x = move_toward(velocity.x, 0, walk_speed)
+		velocity.z = move_toward(velocity.z, 0, walk_speed)
+	
+	# Adding enemy hit to velocity
+	velocity += hit_velocity
+	hit_velocity.x = move_toward(hit_velocity.x, 0, 0.1)
+	hit_velocity.z = move_toward(hit_velocity.z, 0, 0.1)
+	
 	move_and_slide()
+
+
+# Zombie will call this function
+func hit(dir : Vector3) -> void:
+	# signals UI to make screen red
+	emit_signal("player_hit")
+	hit_velocity.x = dir.x * hit_stagger
+	hit_velocity.z = dir.z * hit_stagger
