@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bitot6q3psgra"]
+
+[ext_resource type="Script" uid="uid://defw17y5err6m" path="res://microgames/ZombieShooter/Scripts/player.gd" id="1_qphsc"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qphsc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qfcj8"]
+
+[node name="player" type="CharacterBody3D"]
+script = ExtResource("1_qphsc")
+walking_speed = 5.0
+mouse_sens = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_qphsc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_qfcj8")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="Camera3D" type="Camera3D" parent="head"]

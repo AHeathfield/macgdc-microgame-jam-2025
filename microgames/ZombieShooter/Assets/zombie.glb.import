@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bb45e0t0dxax1"
+uid="uid://6fw3oj1ud7u2"
 path="res://.godot/imported/zombie.glb-ecef659829ad393f709f211b188ae818.scn"
 
 [deps]
@@ -2094,6 +2094,13 @@ _subresources={
 "slice_99/save_to_file/path": "",
 "slice_99/start_frame": 0,
 "slices/amount": 0
+}
+},
+"materials": {
+"Material.001": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://microgames/ZombieShooter/Assets/Material.001.tres",
+"use_external/path": "uid://dijdm7svt38f5"
 }
 }
 }
