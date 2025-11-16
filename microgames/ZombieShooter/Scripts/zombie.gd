@@ -47,9 +47,13 @@ func _physics_process(delta) -> void:
 
 func take_damage(damage : int) -> void:
 	health -= damage
-	#Add something to show that zombie got hit (like red)
+	var texture = $zombie/Skeleton3D/Head.get_active_material(0)
+	texture.emission = Color(255, 0, 0)
 	if health <= 0:
 		queue_free()
+	else:
+		await get_tree().create_timer(0.3).timeout
+		texture.emission = Color(0, 0, 0)
 
 
 func _player_in_range() -> bool:

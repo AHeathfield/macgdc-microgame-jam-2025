@@ -6,6 +6,7 @@
 [ext_resource type="Animation" uid="uid://dqlhpn17hstxk" path="res://microgames/ZombieShooter/Assets/zombie_attack.res" id="3_r5y2a"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_v1cvo"]
+resource_local_to_scene = true
 resource_name = "zombie_test_Cube_001"
 _surfaces = [{
 "aabb": AABB(-1.9999999, 10.999999, -1.9999999, 3.9999998, 3.999999, 3.9999998),
@@ -15,7 +16,7 @@ _surfaces = [{
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
 "material": ExtResource("1_uxy1q"),
-"name": "Material.001",
+"name": "zombie_mat",
 "primitive": 3,
 "skin_data": PackedByteArray("AwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAAAwAAAAAAAAD//wAAAAAAAAMAAAAAAAAA//8AAAAAAAADAAAAAAAAAP//AAAAAAAA"),
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -50,6 +51,7 @@ bind/6/bone = -1
 bind/6/pose = Transform3D(0.25239292, 0, 3.811027e-08, 0, -0.25239292, 0, 3.811027e-08, 0, -0.25239292, -0.24982609, 1.0740569, -3.7722693e-08)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_s2k3q"]
+resource_local_to_scene = true
 resource_name = "zombie_test_Cube_002"
 _surfaces = [{
 "aabb": AABB(-3.9999998, 4.9999986, -0.99999994, 1.9999999, 5.9999995, 1.9999999),
@@ -70,6 +72,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_dc7vq"]
+resource_local_to_scene = true
 resource_name = "zombie_test_Cube_011"
 _surfaces = [{
 "aabb": AABB(-1.9999999, -1.000001, -0.99999994, 1.9999999, 5.9999995, 1.9999999),
@@ -90,6 +93,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_lg328"]
+resource_local_to_scene = true
 resource_name = "zombie_test_Cube_003"
 _surfaces = [{
 "aabb": AABB(1.9999999, 4.9999986, -0.99999994, 1.9999999, 5.9999995, 1.9999999),
@@ -110,6 +114,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_aqvu2"]
+resource_local_to_scene = true
 resource_name = "zombie_test_Cube_012"
 _surfaces = [{
 "aabb": AABB(0, -1.000001, -0.99999994, 1.9999999, 5.9999995, 1.9999999),
@@ -130,6 +135,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_mxbia"]
+resource_local_to_scene = true
 resource_name = "zombie_test_Cube_006"
 _surfaces = [{
 "aabb": AABB(-1.9999999, 4.999999, -0.99999994, 3.9999998, 6, 1.9999999),
@@ -275,7 +281,7 @@ bones/2/parent = 1
 bones/2/rest = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.66569865, 0)
 bones/2/enabled = true
 bones/2/position = Vector3(0, 0.66569865, 0)
-bones/2/rotation = Quaternion(0.01106963, 5.440923e-11, -0.03731114, 0.9992424)
+bones/2/rotation = Quaternion(0.043414913, 1.0735136e-11, 0.0017070753, 0.9990557)
 bones/2/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
 bones/3/name = "LeftArm.L"
 bones/3/parent = 2
@@ -289,7 +295,7 @@ bones/4/parent = 2
 bones/4/rest = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.49999976, 0)
 bones/4/enabled = true
 bones/4/position = Vector3(0, 0.49999976, 0)
-bones/4/rotation = Quaternion(0.1736426, -0.0005707041, 0.00045102186, 0.98480856)
+bones/4/rotation = Quaternion(0.17364818, -4.3610653e-06, 3.4465104e-06, 0.9848077)
 bones/4/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
 bones/5/name = "RightArm.R"
 bones/5/parent = 2
@@ -303,14 +309,14 @@ bones/6/parent = 1
 bones/6/rest = Transform3D(0.99999994, 0, 1.5099579e-07, 0, -0.99999994, 0, 1.5099579e-07, 0, -0.99999994, -0.24982609, -0.3381406, 0)
 bones/6/enabled = true
 bones/6/position = Vector3(-0.24982609, -0.3381406, 0)
-bones/6/rotation = Quaternion(0.99650395, 3.2839086e-08, 7.5233956e-08, -0.08354587)
+bones/6/rotation = Quaternion(0.984879, -6.1859957e-09, 7.435629e-08, 0.1732435)
 bones/6/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
 bones/7/name = "RightLeg.R"
 bones/7/parent = 1
 bones/7/rest = Transform3D(0.99999994, 0, 1.5099579e-07, 0, -0.99999994, 0, 1.5099579e-07, 0, -0.99999994, 0.24982609, -0.3381406, 0)
 bones/7/enabled = true
 bones/7/position = Vector3(0.24982609, -0.3381406, 0)
-bones/7/rotation = Quaternion(0.99650395, -3.2839086e-08, 7.5233956e-08, 0.08354587)
+bones/7/rotation = Quaternion(0.984879, 6.1859957e-09, 7.435629e-08, -0.1732435)
 bones/7/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
 
 [node name="Head" type="MeshInstance3D" parent="zombie/Skeleton3D"]
@@ -338,7 +344,7 @@ mesh = SubResource("ArrayMesh_mxbia")
 skin = SubResource("Skin_3yna1")
 
 [node name="Torso2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(3.9510443, 0.2954351, -0.0032728363, -0.2954351, 3.9500735, -0.08765097, -0.0032728373, 0.08765097, 3.9611046, 0, 8.232782, 0)
+transform = Transform3D(3.9620526, -0.013514349, 0.0005872789, 0.013514349, 3.9471169, -0.34370148, 0.0005872788, 0.34370148, 3.94714, 0, 8.232782, 0)
 bone_name = "Torso"
 bone_idx = 2
 
@@ -352,7 +358,7 @@ transform = Transform3D(1, 4.634491e-07, -4.94756e-09, -4.634491e-07, 1, 2.21189
 shape = SubResource("BoxShape3D_orkfj")
 
 [node name="Head2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(3.9512393, 0.27220687, -0.10793956, -0.29282093, 3.6822119, -1.4330434, 0.001860651, 1.4371016, 3.692259, 0.14771748, 10.207818, 0.043825462)
+transform = Transform3D(3.9620523, -0.012531368, 0.005144751, 0.0135318, 3.5915236, -1.6729672, 0.0006277203, 1.6729751, 3.5915453, -0.0067571714, 10.20634, 0.17185067)
 bone_name = "Head"
 bone_idx = 4
 
@@ -367,7 +373,7 @@ transform = Transform3D(0.9999925, -1.6298145e-09, -1.0011718e-08, -6.4028427e-0
 shape = SubResource("BoxShape3D_uxy1q")
 
 [node name="LeftArm2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(-3.951044, 0.0032729397, -0.29543567, 0.29543567, 0.08765238, -3.950073, 0.0032728522, -3.9611042, -0.08765238, -2.8985426, 10.426671, 0.046151273)
+transform = Transform3D(-3.9620523, -0.0005872855, 0.013513747, -0.01351375, 0.34370285, -3.9471161, -0.00058722484, -3.9471393, -0.34370285, -3.0608084, 10.187051, 0.17062546)
 bone_name = "LeftArm.L"
 bone_idx = 3
 
@@ -382,7 +388,7 @@ transform = Transform3D(1, -4.9360096e-08, -4.0745363e-10, 5.5879354e-08, 1, -2.
 shape = SubResource("BoxShape3D_8j5qa")
 
 [node name="RightArm2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(-3.951044, 0.003272941, -0.29543447, 0.29543447, 0.08765238, -3.950073, 0.0032728245, -3.9611042, -0.08765238, 3.1926496, 9.971209, 0.04110565)
+transform = Transform3D(-3.9620523, -0.00058728404, 0.013514942, -0.013514941, 0.34370285, -3.9471161, -0.00058732997, -3.9471393, -0.34370285, 3.047355, 10.207886, 0.17153086)
 bone_name = "RightArm.R"
 bone_idx = 5
 
@@ -397,7 +403,7 @@ transform = Transform3D(1, -4.9360096e-08, -4.0745363e-10, 5.5879354e-08, 1, -2.
 shape = SubResource("BoxShape3D_8j5qa")
 
 [node name="LeftLeg2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(3.9620757, 3.091193e-07, 5.723406e-07, 2.09505e-07, -3.9067662, 0.65971565, 6.158215e-07, -0.65971565, -3.9067662, -0.98982996, 4.2554946, 0)
+transform = Transform3D(3.9620757, -1.5035442e-07, 5.718088e-07, 5.3799326e-08, -3.7242455, -1.3520495, 5.8879317e-07, 1.3520495, -3.7242455, -0.98982996, 4.2554946, 0)
 bone_name = "LeftLeg.L"
 bone_idx = 6
 
@@ -412,7 +418,7 @@ transform = Transform3D(1, -4.9360096e-08, -4.0745363e-10, 5.5879354e-08, 1, -2.
 shape = SubResource("BoxShape3D_8j5qa")
 
 [node name="RightLeg2" type="BoneAttachment3D" parent="zombie/Skeleton3D"]
-transform = Transform3D(3.9620757, -3.091193e-07, 5.723406e-07, -2.09505e-07, -3.9067662, -0.65971565, 6.158215e-07, 0.65971565, -3.9067662, 0.98982996, 4.2554946, 0)
+transform = Transform3D(3.9620757, 1.5035442e-07, 5.718088e-07, -5.3799326e-08, -3.7242455, 1.3520495, 5.8879317e-07, -1.3520495, -3.7242455, 0.98982996, 4.2554946, 0)
 bone_name = "RightLeg.R"
 bone_idx = 7
 
