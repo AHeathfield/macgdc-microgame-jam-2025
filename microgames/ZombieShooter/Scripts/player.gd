@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @export var walk_speed : float = 5.0
 @export var mouse_sens : float = 0.4
+@export var bullet_damage: int = 25
 ## This adds a gradual increase and decrease to movement speed
 @export var lerp_speed : float = 15.0
 @export var hit_stagger : float = 5.0
@@ -9,9 +10,11 @@ extends CharacterBody3D
 
 @onready var head = $head
 @onready var gun_animation = $head/Gun/AnimationPlayer
+@onready var aim_ray = $head/AimRay
 
 # signals
 signal player_hit
+signal enemy_hit
 
 var jump_velocity = 4.5
 var hit_velocity : Vector3 = Vector3.ZERO
@@ -83,3 +86,10 @@ func hit(dir : Vector3) -> void:
 func _shoot() -> void:
 	if !gun_animation.is_playing():
 		gun_animation.play("Shoot")
+		if aim_ray.is_colliding():
+			var object_hit = aim_ray.get_collider()
+			if object_hit.is_in_group("Enemy"):
+				# Calling the hit() method on zombie
+				object_hit.hit(bullet_damage)
+				emit_signal("enemy_hit")
+		

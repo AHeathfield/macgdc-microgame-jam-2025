@@ -34,6 +34,7 @@ game_name = "Zombie Shooter"
 creator_name = "Aidan"
 game_description = "Don't let the zombies kill you."
 game_length = 10
+lose_on_timeout = false
 message = "Survive!"
 control_type = 2
 bomb_timer = NodePath("BombTimer")
@@ -133,4 +134,5 @@ color = Color(0.84263474, 3.5616756e-06, 4.813075e-07, 0.3764706)
 position = Vector2(67, 354)
 
 [connection signal="timeout" from="SubViewport/World/SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="enemy_hit" from="SubViewport/World/player" to="." method="_on_player_enemy_hit"]
 [connection signal="player_hit" from="SubViewport/World/player" to="." method="_on_player_player_hit"]

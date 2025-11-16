@@ -1,10 +1,12 @@
 extends CharacterBody3D
 
 @export var player : CharacterBody3D
+@export var health : int = 100
 @export var speed : float = 5.0
 
 @onready var nav_agent = $NavigationAgent3D
 @onready var animation_tree = $AnimationTree
+
 
 var state_machine
 var left_arm_colliding : bool = false
@@ -41,6 +43,13 @@ func _physics_process(delta) -> void:
 	animation_tree.set("parameters/conditions/walk", !_player_in_range())
 	
 	move_and_slide()
+
+
+func take_damage(damage : int) -> void:
+	health -= damage
+	#Add something to show that zombie got hit (like red)
+	if health <= 0:
+		queue_free()
 
 
 func _player_in_range() -> bool:

@@ -66,3 +66,10 @@ func _on_spawn_timer_timeout():
 	zombie_inst.position = spawn_point
 	zombie_inst.player = player
 	nav_region_3d.add_child(zombie_inst)
+
+
+func _on_player_enemy_hit():
+	var hitmarker = $SubViewport/GUI/crosshair/hitmarker
+	hitmarker.visible = true
+	await get_tree().create_timer(0.3).timeout
+	hitmarker.visible = false
