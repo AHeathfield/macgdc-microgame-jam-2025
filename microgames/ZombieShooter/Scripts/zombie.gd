@@ -3,6 +3,7 @@ extends CharacterBody3D
 @export var player : CharacterBody3D
 @export var health : int = 100
 @export var speed : float = 5.0
+@export var damage: int = 50
 
 @onready var nav_agent = $NavigationAgent3D
 @onready var animation_tree = $AnimationTree
@@ -63,7 +64,7 @@ func _player_in_range() -> bool:
 func _hit_finished() -> void:
 	if left_arm_colliding or right_arm_colliding:
 		var dir = global_position.direction_to(player.global_position)
-		player.hit(dir)
+		player.hit(dir, damage)
 
 
 func _on_left_arm_area_3d_body_entered(body):

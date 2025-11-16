@@ -1,11 +1,13 @@
 extends Microgame
 
-@export var hit_duration : float = 0.5
+@export var hit_overlay_duration : float = 0.5
 
 # GUI
 @onready var sub_viewport = $SubViewport
 @onready var crosshair = $SubViewport/GUI/crosshair
+@onready var crosshair_animations = $SubViewport/GUI/crosshair/CrosshairAnimations
 @onready var hit_overlay = $SubViewport/GUI/HitOverlay
+@onready var healthbar = $SubViewport/GUI/Healthbar
 
 # World
 @onready var player: CharacterBody3D = $SubViewport/World/player
@@ -36,27 +38,15 @@ func _input(event):
 		player.unhandled_input(event)
 
 
-func _process(_delta: float) -> void:
-	
-	var we_won := false
-	var we_lost := false
-	
-	
-	if we_won:
-		win_game.emit()
-	
-	if we_lost:
-		lose_game.emit()
-
-
 func _get_random_child(parent_node):
 	var random_id = randi() % parent_node.get_child_count()
 	return parent_node.get_child(random_id)
 
 
 func _on_player_player_hit():
+	healthbar.value = player.health
 	hit_overlay.visible = true
-	await get_tree().create_timer(hit_duration).timeout
+	await get_tree().create_timer(hit_overlay_duration).timeout
 	hit_overlay.visible = false
 
 
@@ -69,7 +59,9 @@ func _on_spawn_timer_timeout():
 
 
 func _on_player_enemy_hit():
-	var hitmarker = $SubViewport/GUI/crosshair/hitmarker
-	hitmarker.visible = true
-	await get_tree().create_timer(0.3).timeout
-	hitmarker.visible = false
+	crosshair_animations.play("HitMarker")
+
+
+func _on_player_player_dead():
+	lose_game.emit()
+	$SubViewport/GUI/DeathScreen/DeathAnimation.play("DeathScreen")
