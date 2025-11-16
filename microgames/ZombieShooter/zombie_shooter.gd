@@ -2,8 +2,13 @@ extends Microgame
 
 @export var hit_duration : float = 0.5
 
-@onready var player: CharacterBody3D = $SubViewport/World/player
+# GUI
+@onready var sub_viewport = $SubViewport
+@onready var crosshair = $SubViewport/GUI/crosshair
 @onready var hit_overlay = $SubViewport/GUI/HitOverlay
+
+# World
+@onready var player: CharacterBody3D = $SubViewport/World/player
 @onready var nav_region_3d = $SubViewport/World/NavigationRegion3D
 @onready var spawners = $SubViewport/World/spawners
 
@@ -14,6 +19,9 @@ func _ready() -> void:
 	super()
 	set_process_unhandled_input(true)
 	randomize() # Creates seed for random number generator
+	# Position crosshair in center
+	crosshair.position.x = sub_viewport.size.x / 2 - (32 * crosshair.scale.x)
+	crosshair.position.y = sub_viewport.size.y / 2 - (32 * crosshair.scale.y)
 
 
 # Because of the subview port, input events like this need to be handled here

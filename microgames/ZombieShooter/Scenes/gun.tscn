@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://dtufq2hjeh1wk"]
+[gd_scene load_steps=12 format=4 uid="uid://dtufq2hjeh1wk"]
 
 [ext_resource type="Material" uid="uid://cjernfyjsve0w" path="res://microgames/ZombieShooter/Assets/ak47_gun_mat.tres" id="1_5dhio"]
 [ext_resource type="Material" uid="uid://d0nhs2j3obluc" path="res://microgames/ZombieShooter/Assets/ak47_mag_mat.tres" id="2_ei0jn"]
@@ -71,9 +71,111 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_t6dgl")
 
+[sub_resource type="BoxMesh" id="BoxMesh_5dhio"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ei0jn"]
+albedo_color = Color(0.5647059, 0.52156866, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="Animation" id="Animation_ei0jn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ak47:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.034906585)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ak47/MuzzleFlash:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.17, 0.17, 0.17)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ak47/MuzzleFlash:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-2.4276862, 0.45263064, -0.4770121)]
+}
+
+[sub_resource type="Animation" id="Animation_5dhio"]
+resource_name = "Shoot"
+length = 0.07
+step = 0.01
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ak47")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.01, 1, 0.04, 0, 0, 0.06, 1, -0.005, 0, 0, 0.07, 1, 0, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ak47:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.010039062, 0.06, 0.07),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.017453292), Vector3(0, 0, 0.008726646), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ak47/MuzzleFlash:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.020039063, 0.029960938, 0.040012576, 0.050012574, 0.05997351),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.17, 0.17, 0.17), Vector3(0.25, 0.25, 0.25), Vector3(0.27, 0.27, 0.27), Vector3(0.2, 0.2, 0.2), Vector3(0.15000004, 0.15000004, 0.15), Vector3(0.120000005, 0.120000005, 0.12), Vector3(0.099999994, 0.099999994, 0.1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ak47/MuzzleFlash:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.020039063, 0.029960938, 0.040012576, 0.050012574, 0.05997351),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-2.4276862, 0.45263064, -0.4770121), Vector3(-2.4869199, 0.4516008, -0.4770121), Vector3(-2.4988055, 0.4515069, -0.4770121), Vector3(-2.4556186, 0.45193398, -0.4770121), Vector3(-2.431665, 0.45940447, -0.4770121), Vector3(-2.4158063, 0.45709485, -0.4770121), Vector3(-2.4071949, 0.45474342, -0.4770121)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g5ic4"]
+_data = {
+&"RESET": SubResource("Animation_ei0jn"),
+&"Shoot": SubResource("Animation_5dhio")
+}
+
 [node name="Gun" type="Node3D"]
 
 [node name="ak47" type="Node3D" parent="."]
+transform = Transform3D(0.99939084, 0.034899496, 0, -0.034899496, 0.99939084, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Gun" type="MeshInstance3D" parent="ak47"]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, -0.558232)
@@ -84,3 +186,13 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.037432313, -0.06946528, -0.5273799)
 mesh = SubResource("ArrayMesh_wv5wf")
 skeleton = NodePath("")
+
+[node name="MuzzleFlash" type="MeshInstance3D" parent="ak47"]
+transform = Transform3D(0.17, 0, 0, 0, 0.17, 0, 0, 0, 0.17, -2.4276862, 0.45263064, -0.4770121)
+mesh = SubResource("BoxMesh_5dhio")
+surface_material_override/0 = SubResource("StandardMaterial3D_ei0jn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g5ic4")
+}

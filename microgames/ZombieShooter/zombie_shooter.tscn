@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://3i5s37pnwpwc"]
+[gd_scene load_steps=12 format=3 uid="uid://3i5s37pnwpwc"]
 
 [ext_resource type="Script" uid="uid://cqwucx826k1ne" path="res://microgames/ZombieShooter/zombie_shooter.gd" id="1_7towe"]
 [ext_resource type="PackedScene" uid="uid://ddhoio73023ba" path="res://scenes/main/bomb_timer/bomb_timer.tscn" id="2_pntch"]
 [ext_resource type="PackedScene" uid="uid://bitot6q3psgra" path="res://microgames/ZombieShooter/Scenes/player.tscn" id="3_1rkq4"]
+[ext_resource type="Texture2D" uid="uid://bpqfndkh3elt0" path="res://microgames/ZombieShooter/Assets/crosshair.png" id="3_qfcj8"]
+[ext_resource type="Texture2D" uid="uid://djba0hcm70efc" path="res://microgames/ZombieShooter/Assets/hitmarker.png" id="4_4tfu3"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_a21eq"]
 viewport_path = NodePath("SubViewport")
@@ -24,9 +26,6 @@ sky_material = SubResource("ProceduralSkyMaterial_1rkq4")
 background_mode = 2
 sky = SubResource("Sky_qfcj8")
 tonemap_mode = 2
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_pntch"]
-specular_color = Color(0, 1, 1, 1)
 
 [node name="ZombieShooter" type="Node2D" node_paths=PackedStringArray("bomb_timer")]
 process_mode = 1
@@ -92,6 +91,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.985205, 0, 8.999489)
 autostart = true
 
 [node name="player" parent="SubViewport/World" groups=["player"] instance=ExtResource("3_1rkq4")]
+hit_stagger = 10.0
 
 [node name="GUI" type="Control" parent="SubViewport"]
 layout_mode = 3
@@ -105,77 +105,21 @@ size_flags_vertical = 4
 
 [node name="crosshair" type="Control" parent="SubViewport/GUI"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+scale = Vector2(0.25, 0.25)
 
-[node name="up" type="TextureRect" parent="SubViewport/GUI/crosshair"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1.0
-offset_top = -5.0
-offset_right = 1.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CanvasTexture_pntch")
+[node name="regular" type="TextureRect" parent="SubViewport/GUI/crosshair"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_qfcj8")
 
-[node name="down" type="TextureRect" parent="SubViewport/GUI/crosshair"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1.0
-offset_top = -5.0000153
-offset_right = 1.0
-offset_bottom = 5.0000153
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CanvasTexture_pntch")
-
-[node name="left" type="TextureRect" parent="SubViewport/GUI/crosshair"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -0.9999962
-offset_right = 5.0
-offset_bottom = 0.9999962
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CanvasTexture_pntch")
-
-[node name="right" type="TextureRect" parent="SubViewport/GUI/crosshair"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -0.9999962
-offset_right = 5.0
-offset_bottom = 0.9999962
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CanvasTexture_pntch")
+[node name="hitmarker" type="TextureRect" parent="SubViewport/GUI/crosshair"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_4tfu3")
 
 [node name="HitOverlay" type="ColorRect" parent="SubViewport/GUI"]
 visible = false
