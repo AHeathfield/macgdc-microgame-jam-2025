@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cjernfyjsve0w"]
+
+[ext_resource type="Texture2D" uid="uid://lafqjm66pqoo" path="res://microgames/ZombieShooter/Assets/ak47_ak47_gun_texture_map.png" id="1_edh78"]
+
+[resource]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_texture = ExtResource("1_edh78")
+roughness = 0.5
+texture_filter = 0
