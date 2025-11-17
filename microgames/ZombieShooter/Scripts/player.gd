@@ -12,6 +12,8 @@ extends CharacterBody3D
 @onready var head = $head
 @onready var gun_animation = $head/Gun/AnimationPlayer
 @onready var aim_ray = $head/AimRay
+@onready var aim_ray_end = $head/AimRayEnd
+@onready var gun_barrel = $head/Gun/barrel
 
 # signals
 signal player_hit
@@ -21,6 +23,7 @@ signal enemy_hit
 var jump_velocity = 4.5
 var hit_velocity : Vector3 = Vector3.ZERO
 var direction : Vector3 = Vector3.ZERO
+var bullet_trail = load("res://microgames/ZombieShooter/Scenes/bullet_trail.tscn")
 
 func _ready() -> void:
 	# Locks the cursor in middle of screen and makes it invisible
@@ -97,10 +100,18 @@ func _die() -> void:
 func _shoot() -> void:
 	if !gun_animation.is_playing():
 		gun_animation.play("Shoot")
+		var bullet_trail_inst = bullet_trail.instantiate()
 		if aim_ray.is_colliding():
+			bullet_trail_inst.init(gun_barrel.global_position, aim_ray.get_collision_point())
 			var object_hit = aim_ray.get_collider()
 			if object_hit.is_in_group("Enemy"):
 				# Calling the hit() method on zombie
 				object_hit.hit(bullet_damage)
 				emit_signal("enemy_hit")
+		else:
+			bullet_trail_inst.init(gun_barrel.global_position, aim_ray_end.global_position)
+			
+		# I'm making the bullet trail a child of the parent of the player to be put in the same scene (it bugs out if it's child of the player
+		# I followed some tutorial for this part but im guessing this has something to do with relative positions.
+		get_parent().add_child(bullet_trail_inst)
 		

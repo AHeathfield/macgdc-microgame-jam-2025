@@ -72,6 +72,9 @@ collision_mask = 2
 collide_with_areas = true
 collide_with_bodies = false
 
+[node name="AimRayEnd" type="Node3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100.462)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_5mba2")
