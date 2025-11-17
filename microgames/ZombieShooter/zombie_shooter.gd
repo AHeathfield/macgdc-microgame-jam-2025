@@ -8,6 +8,7 @@ extends Microgame
 @onready var crosshair_animations = $SubViewport/GUI/crosshair/CrosshairAnimations
 @onready var hit_overlay = $SubViewport/GUI/HitOverlay
 @onready var healthbar = $SubViewport/GUI/Healthbar
+@onready var radar_entities = $SubViewport/GUI/Radar/RadarViewPort/Entities
 
 # World
 @onready var player: CharacterBody3D = $SubViewport/World/player
@@ -15,7 +16,8 @@ extends Microgame
 @onready var spawners = $SubViewport/World/spawners
 
 var zombie = load("res://microgames/ZombieShooter/Scenes/zombie.tscn")
-var zombie_inst
+var radar_enemy = load("res://microgames/ZombieShooter/Scenes/radar_enemy.tscn")
+
 
 func _ready() -> void:
 	super()
@@ -24,6 +26,8 @@ func _ready() -> void:
 	# Position crosshair in center
 	crosshair.position.x = sub_viewport.size.x / 2 - (32 * crosshair.scale.x)
 	crosshair.position.y = sub_viewport.size.y / 2 - (32 * crosshair.scale.y)
+	# Creating starting radar enemies
+	_create_radar_enemy($SubViewport/World/Zombie)
 
 
 # Because of the subview port, input events like this need to be handled here
@@ -42,6 +46,10 @@ func _get_random_child(parent_node):
 	var random_id = randi() % parent_node.get_child_count()
 	return parent_node.get_child(random_id)
 
+func _create_radar_enemy(enemy : CharacterBody3D) -> void:
+	var radar_enemy_inst = radar_enemy.instantiate()
+	radar_enemy_inst.enemy3d = enemy
+	radar_entities.add_child(radar_enemy_inst)
 
 func _on_player_player_hit():
 	healthbar.value = player.health
@@ -51,11 +59,15 @@ func _on_player_player_hit():
 
 
 func _on_spawn_timer_timeout():
+	# Spawning zombie
 	var spawn_point = _get_random_child(spawners).global_position
-	zombie_inst = zombie.instantiate()
+	var zombie_inst = zombie.instantiate()
 	zombie_inst.position = spawn_point
 	zombie_inst.player = player
 	nav_region_3d.add_child(zombie_inst)
+	
+	# Creating corresponding radar enemy
+	_create_radar_enemy(zombie_inst)
 
 
 func _on_player_enemy_hit():

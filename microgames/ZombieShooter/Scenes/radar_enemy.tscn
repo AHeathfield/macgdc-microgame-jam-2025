@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmmh1xkdgohsm"]
+
+[ext_resource type="Texture2D" uid="uid://c54ammikef7kn" path="res://microgames/ZombieShooter/Assets/radar_enemy.png" id="1_xxc1m"]
+[ext_resource type="Script" uid="uid://b633si3a3am1q" path="res://microgames/ZombieShooter/Scripts/radar_enemy.gd" id="2_73i2r"]
+
+[node name="RadarEnemy" type="Sprite2D"]
+texture = ExtResource("1_xxc1m")
+script = ExtResource("2_73i2r")

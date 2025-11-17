@@ -46,8 +46,8 @@ func _physics_process(delta) -> void:
 	move_and_slide()
 
 
-func take_damage(damage : int) -> void:
-	health -= damage
+func take_damage(damage_taken : int) -> void:
+	health -= damage_taken
 	var texture = $zombie/Skeleton3D/Head.get_active_material(0)
 	texture.emission = Color(255, 0, 0)
 	if health <= 0:

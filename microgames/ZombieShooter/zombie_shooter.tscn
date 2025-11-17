@@ -1,11 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://3i5s37pnwpwc"]
+[gd_scene load_steps=25 format=3 uid="uid://3i5s37pnwpwc"]
 
 [ext_resource type="Script" uid="uid://cqwucx826k1ne" path="res://microgames/ZombieShooter/zombie_shooter.gd" id="1_7towe"]
 [ext_resource type="PackedScene" uid="uid://ddhoio73023ba" path="res://scenes/main/bomb_timer/bomb_timer.tscn" id="2_pntch"]
 [ext_resource type="PackedScene" uid="uid://bitot6q3psgra" path="res://microgames/ZombieShooter/Scenes/player.tscn" id="3_1rkq4"]
 [ext_resource type="Texture2D" uid="uid://bpqfndkh3elt0" path="res://microgames/ZombieShooter/Assets/crosshair.png" id="3_qfcj8"]
+[ext_resource type="PackedScene" uid="uid://dtdul6ubbj3ow" path="res://microgames/ZombieShooter/Scenes/zombie.tscn" id="3_xtk10"]
 [ext_resource type="Texture2D" uid="uid://djba0hcm70efc" path="res://microgames/ZombieShooter/Assets/hitmarker.png" id="4_4tfu3"]
 [ext_resource type="FontFile" uid="uid://dxxddb5c1lot" path="res://scenes/main/sprites/font.ttf" id="5_4tfu3"]
+[ext_resource type="Script" uid="uid://bf384j516wn4x" path="res://microgames/ZombieShooter/Scripts/radar.gd" id="6_1qt1e"]
+[ext_resource type="Texture2D" uid="uid://dt5n6wr30lga1" path="res://microgames/ZombieShooter/Assets/radar_player.png" id="8_6f18p"]
+[ext_resource type="PackedScene" uid="uid://bmmh1xkdgohsm" path="res://microgames/ZombieShooter/Scenes/radar_enemy.tscn" id="9_6f18p"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_a21eq"]
 viewport_path = NodePath("SubViewport")
@@ -214,6 +218,11 @@ autostart = true
 [node name="player" parent="SubViewport/World" groups=["player"] instance=ExtResource("3_1rkq4")]
 hit_stagger = 10.0
 
+[node name="Zombie" parent="SubViewport/World" node_paths=PackedStringArray("player") instance=ExtResource("3_xtk10")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -7.349453)
+player = NodePath("../player")
+health = 1000
+
 [node name="GUI" type="Control" parent="SubViewport"]
 layout_mode = 3
 anchors_preset = 15
@@ -223,6 +232,46 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Radar" type="SubViewportContainer" parent="SubViewport/GUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -110.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 110.0
+grow_horizontal = 0
+stretch = true
+
+[node name="RadarViewPort" type="SubViewport" parent="SubViewport/GUI/Radar" node_paths=PackedStringArray("player")]
+handle_input_locally = false
+size = Vector2i(100, 100)
+render_target_update_mode = 4
+script = ExtResource("6_1qt1e")
+player = NodePath("../../../World/player")
+
+[node name="Background" type="ColorRect" parent="SubViewport/GUI/Radar/RadarViewPort"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Entities" type="Node2D" parent="SubViewport/GUI/Radar/RadarViewPort"]
+scale = Vector2(0.1, 0.1)
+
+[node name="Player" type="Sprite2D" parent="SubViewport/GUI/Radar/RadarViewPort/Entities"]
+position = Vector2(50, 50)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_6f18p")
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport/GUI/Radar/RadarViewPort/Entities/Player"]
+zoom = Vector2(4, 4)
+
+[node name="RadarEnemy" parent="SubViewport/GUI/Radar/RadarViewPort/Entities" instance=ExtResource("9_6f18p")]
 
 [node name="crosshair" type="Control" parent="SubViewport/GUI"]
 layout_mode = 1
@@ -255,9 +304,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -100.0
-offset_top = 5.0
+offset_top = 10.0
 offset_right = 100.0
-offset_bottom = 32.000004
+offset_bottom = 37.000004
 grow_horizontal = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_qfcj8")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4tfu3")
