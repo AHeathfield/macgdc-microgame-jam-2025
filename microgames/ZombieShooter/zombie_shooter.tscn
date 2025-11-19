@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://3i5s37pnwpwc"]
+[gd_scene load_steps=29 format=3 uid="uid://3i5s37pnwpwc"]
 
 [ext_resource type="Script" uid="uid://cqwucx826k1ne" path="res://microgames/ZombieShooter/zombie_shooter.gd" id="1_7towe"]
 [ext_resource type="PackedScene" uid="uid://ddhoio73023ba" path="res://scenes/main/bomb_timer/bomb_timer.tscn" id="2_pntch"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dm75rntpn1um6" path="res://microgames/ZombieShooter/Scenes/fence_pole.tscn" id="3_tqajl"]
 [ext_resource type="PackedScene" uid="uid://dtdul6ubbj3ow" path="res://microgames/ZombieShooter/Scenes/zombie.tscn" id="3_xtk10"]
 [ext_resource type="Texture2D" uid="uid://djba0hcm70efc" path="res://microgames/ZombieShooter/Assets/hitmarker.png" id="4_4tfu3"]
+[ext_resource type="PackedScene" uid="uid://be2pv1qnxbx5d" path="res://microgames/ZombieShooter/Scenes/tombstone.tscn" id="4_ffsu1"]
 [ext_resource type="FontFile" uid="uid://dxxddb5c1lot" path="res://scenes/main/sprites/font.ttf" id="5_4tfu3"]
 [ext_resource type="Script" uid="uid://bf384j516wn4x" path="res://microgames/ZombieShooter/Scripts/radar.gd" id="6_1qt1e"]
 [ext_resource type="Texture2D" uid="uid://dt5n6wr30lga1" path="res://microgames/ZombieShooter/Assets/radar_player.png" id="8_6f18p"]
@@ -768,6 +769,80 @@ transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3
 [node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall32" instance=ExtResource("3_tqajl")]
 transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
 
+[node name="tombstones" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage"]
+
+[node name="Tombstone" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(0.933167, 0.35944313, 0, -0.3568217, 0.9263613, 0.120552674, 0.04333183, -0.11249577, 0.99270695, -16.307066, -0.26532745, -4.6786146)
+
+[node name="Tombstone2" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.744188, -0.26532745, -4.6786146)
+
+[node name="Tombstone3" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(1, 0, 0, 0, 0.9951487, 0.098381884, 0, -0.098381884, 0.9951487, -2.9889283, -0.26532745, -4.6786146)
+
+[node name="Tombstone4" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(0.99798155, 0.057521015, 0.026910543, -0.054570675, 0.9935055, -0.09984633, -0.032479033, 0.09817627, 0.99463904, 3.3913612, -0.26532745, -4.6786146)
+
+[node name="Tombstone5" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(1, 0, 0, 0, 0.49438193, -0.8692448, 0, 0.8692448, 0.49438193, 9.954239, -0.26532745, -4.6786146)
+
+[node name="Tombstone6" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(0.9811639, 0.1425198, 0.13040525, -0.18430956, 0.89282185, 0.41097346, -0.057856783, -0.42726725, 0.9022723, 16.7095, -0.26532745, -4.6786146)
+
+[node name="Tombstone7" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.307066, -0.26532745, 12.925939)
+
+[node name="Tombstone8" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(0.95883965, 0, 0.28394842, -0.023982411, 0.9964268, 0.080984026, -0.28293383, -0.08446047, 0.9554135, -9.744188, -0.26532745, 12.925939)
+
+[node name="Tombstone9" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(1, 0, 0, 0, 0.07830245, 0.99692965, 0, -0.99692965, 0.07830245, -2.9889283, -0.26532745, 12.925939)
+
+[node name="Tombstone10" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(0.37706503, -0.9261868, 0, 0.9261868, 0.37706503, 0, 0, 0, 1, 3.3913612, -0.26532745, 12.925939)
+
+[node name="Tombstone11" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(1, 0, 0, 0, 0.97595865, 0.21795587, 0, -0.21795587, 0.97595865, 9.954239, -0.26532745, 12.925939)
+
+[node name="Tombstone12" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7095, -0.26532745, 12.925939)
+
+[node name="Tombstone13" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(-1, 0, 8.742278e-08, -2.44312e-08, 0.9601572, -0.27946037, -8.393961e-08, -0.27946037, -0.9601572, 16.645372, -0.26532745, 4.221408)
+
+[node name="Tombstone14" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(-0.9858677, 0.16752589, 8.618729e-08, 0.16564973, 0.97482663, 0.14924195, 0.025001807, 0.14713283, -0.9888007, 10.082495, -0.26532745, 4.221407)
+
+[node name="Tombstone15" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(-0.99934113, -0.036139064, -0.0033594302, -0.03629487, 0.9950509, 0.09250077, -8.704746e-08, 0.09256175, -0.995707, 3.3272343, -0.26532745, 4.221406)
+
+[node name="Tombstone16" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3.0530553, -0.26532745, 4.221406)
+
+[node name="Tombstone17" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(-0.95681864, -0.04873736, 0.2865707, 1.4657614e-08, 0.9858444, 0.16766356, -0.2906856, 0.16042362, -0.94327426, -9.615932, -0.26532745, 4.221405)
+
+[node name="Tombstone18" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(-1, 0, 8.742278e-08, 8.740566e-08, 0.019790769, 0.99980414, -1.7301645e-09, 0.99980414, -0.019790769, -16.371193, -0.26532745, 4.221404)
+
+[node name="Tombstone19" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(-0.793587, 0.60692525, -0.043142915, 8.7202736e-08, 0.070905596, 0.99748313, 0.6084568, 0.7915897, -0.056269817, 16.645372, -0.26532745, -13.202091)
+
+[node name="Tombstone20" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(-0.76151735, 0.34035614, 0.5515877, 0.40804368, 0.91296244, -3.567231e-08, -0.50357884, 0.22507185, -0.8341169, 10.082495, -0.26532745, -13.202092)
+
+[node name="Tombstone21" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(-1, 0, 8.742278e-08, -4.3180442e-08, 0.86950356, -0.4939267, -7.6014416e-08, -0.4939267, -0.86950356, 3.3272343, -0.26532745, -13.202093)
+
+[node name="Tombstone22" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3.0530553, -0.26532745, -13.202093)
+
+[node name="Tombstone23" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(-0.802781, 0.54586506, 0.23994645, 0.5832671, 0.6352893, 0.5061691, 0.12386463, 0.54629576, -0.8283832, -9.615932, -0.26532745, -13.202094)
+
+[node name="Tombstone24" parent="SubViewport/World/NavigationRegion3D/stage/tombstones" instance=ExtResource("4_ffsu1")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -16.371193, -0.26532745, -13.202095)
+
 [node name="env" type="Node3D" parent="SubViewport/World"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport/World/env"]
@@ -802,6 +877,132 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2272773, 0, 0)
 
 [node name="Path2" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9739833, 0, 0)
+
+[node name="Path4" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.117428, 0, 0)
+
+[node name="Path5" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.344706, 0, 0)
+
+[node name="Path6" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.143444, 0, 0)
+
+[node name="Path7" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.512939, 0, 0)
+
+[node name="Path8" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.285662, 0, 0)
+
+[node name="Path9" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.486923, 0, 0)
+
+[node name="Path19" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, -19.552698, 0, 0.04740588)
+
+[node name="Path20" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.552698, 0, 4.274683)
+
+[node name="Path21" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.552698, 0, -3.9265773)
+
+[node name="Path22" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.552696, 0, 12.164834)
+
+[node name="Path23" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.552696, 0, 16.39211)
+
+[node name="Path24" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.552696, 0, 8.19085)
+
+[node name="Path25" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.552698, 0, -12.465533)
+
+[node name="Path26" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.552698, 0, -8.2382555)
+
+[node name="Path27" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.552698, 0, -16.439518)
+
+[node name="Path37" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 19.637487, 0, 0.04740588)
+
+[node name="Path38" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 19.637487, 0, 4.274683)
+
+[node name="Path39" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 19.637487, 0, -3.9265773)
+
+[node name="Path40" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 19.63749, 0, 12.164834)
+
+[node name="Path41" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 19.63749, 0, 16.39211)
+
+[node name="Path42" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 19.63749, 0, 8.19085)
+
+[node name="Path43" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 19.637487, 0, -12.465533)
+
+[node name="Path44" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 19.637487, 0, -8.2382555)
+
+[node name="Path45" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 19.637487, 0, -16.439518)
+
+[node name="Path10" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17.38196)
+
+[node name="Path11" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2272773, 0, 17.38196)
+
+[node name="Path12" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9739833, 0, 17.38196)
+
+[node name="Path13" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.117428, 0, 17.38196)
+
+[node name="Path14" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.344706, 0, 17.38196)
+
+[node name="Path15" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.143444, 0, 17.38196)
+
+[node name="Path16" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.512939, 0, 17.38196)
+
+[node name="Path17" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.285662, 0, 17.38196)
+
+[node name="Path18" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.486923, 0, 17.38196)
+
+[node name="Path28" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17.435326)
+
+[node name="Path29" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2272773, 0, -17.435326)
+
+[node name="Path30" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9739833, 0, -17.435326)
+
+[node name="Path31" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.117428, 0, -17.435326)
+
+[node name="Path32" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.344706, 0, -17.435326)
+
+[node name="Path33" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.143444, 0, -17.435326)
+
+[node name="Path34" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.512939, 0, -17.435326)
+
+[node name="Path35" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.285662, 0, -17.435326)
+
+[node name="Path36" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.486923, 0, -17.435326)
 
 [node name="SpawnTimer" type="Timer" parent="SubViewport/World"]
 autostart = true
