@@ -1,9 +1,12 @@
-[gd_scene load_steps=25 format=3 uid="uid://3i5s37pnwpwc"]
+[gd_scene load_steps=28 format=3 uid="uid://3i5s37pnwpwc"]
 
 [ext_resource type="Script" uid="uid://cqwucx826k1ne" path="res://microgames/ZombieShooter/zombie_shooter.gd" id="1_7towe"]
 [ext_resource type="PackedScene" uid="uid://ddhoio73023ba" path="res://scenes/main/bomb_timer/bomb_timer.tscn" id="2_pntch"]
+[ext_resource type="Texture2D" uid="uid://kft60mtgq1ku" path="res://microgames/ZombieShooter/Assets/dirt_texture.png" id="2_whjfm"]
 [ext_resource type="PackedScene" uid="uid://bitot6q3psgra" path="res://microgames/ZombieShooter/Scenes/player.tscn" id="3_1rkq4"]
+[ext_resource type="PackedScene" uid="uid://gikjnnwk6llg" path="res://microgames/ZombieShooter/Scenes/path.tscn" id="3_gnjhq"]
 [ext_resource type="Texture2D" uid="uid://bpqfndkh3elt0" path="res://microgames/ZombieShooter/Assets/crosshair.png" id="3_qfcj8"]
+[ext_resource type="PackedScene" uid="uid://dm75rntpn1um6" path="res://microgames/ZombieShooter/Scenes/fence_pole.tscn" id="3_tqajl"]
 [ext_resource type="PackedScene" uid="uid://dtdul6ubbj3ow" path="res://microgames/ZombieShooter/Scenes/zombie.tscn" id="3_xtk10"]
 [ext_resource type="Texture2D" uid="uid://djba0hcm70efc" path="res://microgames/ZombieShooter/Assets/hitmarker.png" id="4_4tfu3"]
 [ext_resource type="FontFile" uid="uid://dxxddb5c1lot" path="res://scenes/main/sprites/font.ttf" id="5_4tfu3"]
@@ -18,7 +21,9 @@ viewport_path = NodePath("SubViewport")
 vertices = PackedVector3Array(-9.5, 0.5, -2.25, -5, 0.5, -2.25, -4.75, 0.5, -3.5, -2.75, 0.5, -3.5, -2.75, 0.5, -9.5, -9.5, 0.5, -9.5, 2.75, 0.5, -3.5, 2.75, 0.5, -9.5, 4.75, 0.5, -3.5, 5, 0.5, -2.25, 9.5, 0.5, -2.25, 9.5, 0.5, -9.5, 4.75, 0.5, -1.25, 9.5, 0.5, 9.5, -4.75, 0.5, -1.25, -9.5, 0.5, 9.5)
 polygons = [PackedInt32Array(0, 2, 1), PackedInt32Array(4, 3, 2), PackedInt32Array(0, 5, 2), PackedInt32Array(2, 5, 4), PackedInt32Array(4, 7, 3), PackedInt32Array(3, 7, 6), PackedInt32Array(10, 9, 8), PackedInt32Array(8, 6, 7), PackedInt32Array(10, 8, 11), PackedInt32Array(11, 8, 7), PackedInt32Array(9, 10, 12), PackedInt32Array(12, 10, 13), PackedInt32Array(1, 14, 0), PackedInt32Array(0, 14, 15), PackedInt32Array(12, 13, 14), PackedInt32Array(14, 13, 15)]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qfcj8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gnjhq"]
+albedo_texture = ExtResource("2_whjfm")
+uv1_triplanar = true
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1rkq4"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -181,13 +186,587 @@ navigation_mesh = SubResource("NavigationMesh_1rkq4")
 
 [node name="ground" type="CSGBox3D" parent="SubViewport/World/NavigationRegion3D/stage"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = SubResource("StandardMaterial3D_gnjhq")
 use_collision = true
-size = Vector3(20, 1, 20)
+size = Vector3(100, 1, 100)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="SubViewport/World/NavigationRegion3D/stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6048441, -2.4201353)
-size = Vector3(8.794922, 1.3514404, 1)
-material = SubResource("StandardMaterial3D_qfcj8")
+[node name="fences" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage"]
+
+[node name="Wall" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.671703, 0, 24.55673)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall2" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 7.2774386, -0.988, 24.55673)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall2" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall2" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall2" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall2" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall2" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall3" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.413448, 0, 24.55673)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall3" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall3" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall3" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall3" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall3" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall4" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 20.082952, -0.988, 24.55673)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall4" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall4" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall4" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall4" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall4" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall5" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.009792, 0, 24.55673)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall5" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall5" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall5" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall5" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall5" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall6" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -18.404057, -0.988, 24.55673)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall6" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall6" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall6" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall6" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall6" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall7" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2680464, 0, 24.55673)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall7" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall7" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall7" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall7" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall7" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall8" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.598543, -0.988, 24.55673)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall8" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall8" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall8" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall8" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall8" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall9" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.671703, 0, -24.099476)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall9" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall9" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall9" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall9" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall9" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall10" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 7.2774386, -0.988, -24.099476)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall10" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall10" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall10" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall10" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall10" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall11" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.413448, 0, -24.099476)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall11" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall11" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall11" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall11" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall11" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall12" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 20.082952, -0.988, -24.099476)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall12" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall12" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall12" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall12" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall12" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall13" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.009792, 0, -24.099476)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall13" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall13" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall13" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall13" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall13" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall14" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -18.404057, -0.988, -24.099476)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall14" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall14" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall14" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall14" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall14" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall15" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2680464, 0, -24.099476)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall15" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall15" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall15" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall15" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall15" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall16" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.598543, -0.988, -24.099476)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall16" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall16" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall16" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall16" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall16" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall17" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -26.99847, 0, -5.4047384)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall17" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall17" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall17" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall17" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall17" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall18" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -26.99847, -0.988, -7.010474)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall18" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall18" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall18" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall18" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall18" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall19" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -26.99847, 0, -18.146484)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall19" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall19" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall19" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall19" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall19" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall20" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -26.99847, -0.988, -19.815987)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall20" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall20" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall20" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall20" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall20" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall21" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -26.99847, 0, 20.276756)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall21" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall21" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall21" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall21" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall21" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall22" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -26.99847, -0.988, 18.67102)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall22" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall22" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall22" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall22" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall22" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall23" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -26.99847, 0, 7.5350122)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall23" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall23" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall23" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall23" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall23" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall24" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -26.99847, -0.988, 5.86551)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall24" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall24" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall24" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall24" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall24" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall25" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.770287, 0, -5.4047384)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall25" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall25" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall25" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall25" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall25" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall26" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 25.770287, -0.988, -7.010474)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall26" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall26" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall26" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall26" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall26" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall27" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.770287, 0, -18.146484)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall27" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall27" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall27" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall27" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall27" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall28" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 25.770287, -0.988, -19.815987)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall28" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall28" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall28" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall28" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall28" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall29" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.770287, 0, 20.276756)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall29" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall29" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall29" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall29" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall29" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall30" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 25.770287, -0.988, 18.67102)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall30" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall30" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall30" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall30" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall30" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall31" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.770287, 0, 7.5350122)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall31" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall31" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall31" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall31" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall31" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
+
+[node name="Wall32" type="Node3D" parent="SubViewport/World/NavigationRegion3D/stage/fences"]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 25.770287, -0.988, 5.86551)
+
+[node name="FencePole" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall32" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, 0, 0, 0)
+
+[node name="FencePole5" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall32" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.04544635, 0.32536766, 0, -0.41476715, 0.035650782, 0, 0, 0, 0.46483266, -5.341, 4.253, 0)
+
+[node name="FencePole4" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall32" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -4.693, -1.207, 0)
+
+[node name="FencePole3" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall32" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -3.247, 0.545, 0)
+
+[node name="FencePole2" parent="SubViewport/World/NavigationRegion3D/stage/fences/Wall32" instance=ExtResource("3_tqajl")]
+transform = Transform3D(0.41724956, 0, 0, 0, 0.32731497, 0, 0, 0, 0.46483266, -1.596, -0.656, 0)
 
 [node name="env" type="Node3D" parent="SubViewport/World"]
 
@@ -211,6 +790,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.92165, 0, 8.999489)
 
 [node name="spawner4" type="Node3D" parent="SubViewport/World/spawners"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.985205, 0, 8.999489)
+
+[node name="props" type="Node3D" parent="SubViewport/World"]
+
+[node name="paths" type="Node3D" parent="SubViewport/World/props"]
+
+[node name="Path" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+
+[node name="Path3" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2272773, 0, 0)
+
+[node name="Path2" parent="SubViewport/World/props/paths" instance=ExtResource("3_gnjhq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9739833, 0, 0)
 
 [node name="SpawnTimer" type="Timer" parent="SubViewport/World"]
 autostart = true

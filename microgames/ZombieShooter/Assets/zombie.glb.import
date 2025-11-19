@@ -2099,7 +2099,7 @@ _subresources={
 "materials": {
 "Material.001": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://microgames/ZombieShooter/Assets/Material.001.tres",
+"use_external/fallback_path": "res://microgames/ZombieShooter/Assets/zombie_mat.tres",
 "use_external/path": "uid://dijdm7svt38f5"
 }
 }
