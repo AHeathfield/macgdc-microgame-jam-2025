@@ -20,7 +20,7 @@ signal player_hit
 signal player_dead
 signal enemy_hit
 
-var jump_velocity = 4.5
+var jump_velocity = 6
 var hit_velocity : Vector3 = Vector3.ZERO
 var direction : Vector3 = Vector3.ZERO
 var bullet_trail = load("res://microgames/ZombieShooter/Scenes/bullet_trail.tscn")
@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 	if health > 0:
 		# Add the gravity.
 		if not is_on_floor():
-			velocity += get_gravity() * delta
+			velocity += get_gravity() * 2 * delta
 		
 		# Handle Shooting
 		if Input.is_action_pressed("mouse_left"):
@@ -99,6 +99,8 @@ func _die() -> void:
 
 func _shoot() -> void:
 	if !gun_animation.is_playing():
+		# Shoot sound
+		$head/Gun/ShootSFX.play()
 		gun_animation.play("Shoot")
 		var bullet_trail_inst = bullet_trail.instantiate()
 		if aim_ray.is_colliding():

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3wtnh3nh01qe"]
+
+[ext_resource type="AudioStream" uid="uid://dfdxm1j4wci0h" path="res://microgames/ZombieShooter/Assets/SFX/zombie_death.mp3" id="1_4nx8p"]
+[ext_resource type="Script" uid="uid://clmkdnw485ale" path="res://microgames/ZombieShooter/Scripts/zombie_death_sfx.gd" id="2_4n612"]
+
+[node name="ZombieDeathSFX" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_4nx8p")
+autoplay = true
+script = ExtResource("2_4n612")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

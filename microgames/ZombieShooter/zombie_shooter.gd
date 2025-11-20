@@ -27,7 +27,9 @@ func _ready() -> void:
 	crosshair.position.x = sub_viewport.size.x / 2 - (32 * crosshair.scale.x)
 	crosshair.position.y = sub_viewport.size.y / 2 - (32 * crosshair.scale.y)
 	# Creating starting radar enemies
-	_create_radar_enemy($SubViewport/World/Zombie)
+	_create_radar_enemy($SubViewport/World/StrongZombies/Zombie)
+	_create_radar_enemy($SubViewport/World/StrongZombies/Zombie2)
+	_create_radar_enemy($SubViewport/World/StrongZombies/Zombie3)
 
 
 # Because of the subview port, input events like this need to be handled here

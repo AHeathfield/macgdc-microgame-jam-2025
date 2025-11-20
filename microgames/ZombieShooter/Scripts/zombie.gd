@@ -12,6 +12,7 @@ extends CharacterBody3D
 var state_machine
 var left_arm_colliding : bool = false
 var right_arm_colliding : bool = false
+var zombie_death_sfx = load("res://microgames/ZombieShooter/Scenes/zombie_death_sfx.tscn")
 
 func _ready() -> void:
 	state_machine = animation_tree.get("parameters/playback")
@@ -48,13 +49,12 @@ func _physics_process(delta) -> void:
 
 func take_damage(damage_taken : int) -> void:
 	health -= damage_taken
-	var texture = $zombie/Skeleton3D/Head.get_active_material(0)
-	texture.emission = Color(255, 0, 0)
+	$zombie/HurtAnimation.play("Hurt")
 	if health <= 0:
+		var death_sfx = zombie_death_sfx.instantiate()
+		get_parent().add_child(death_sfx)
+		death_sfx.global_position = global_position
 		queue_free()
-	else:
-		await get_tree().create_timer(0.3).timeout
-		texture.emission = Color(0, 0, 0)
 
 
 func _player_in_range() -> bool:
@@ -65,6 +65,16 @@ func _hit_finished() -> void:
 	if left_arm_colliding or right_arm_colliding:
 		var dir = global_position.direction_to(player.global_position)
 		player.hit(dir, damage)
+
+
+func _start_hurt_overlay() -> void:
+	var texture = $zombie/Skeleton3D/Head.get_active_material(0)
+	texture.emission = Color(255, 0, 0)
+
+
+func _end_hurt_overlay() -> void:
+	var texture = $zombie/Skeleton3D/Head.get_active_material(0)
+	texture.emission = Color(0, 0, 0)
 
 
 func _on_left_arm_area_3d_body_entered(body):

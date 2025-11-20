@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bitot6q3psgra"]
+[gd_scene load_steps=9 format=3 uid="uid://bitot6q3psgra"]
 
 [ext_resource type="Script" uid="uid://defw17y5err6m" path="res://microgames/ZombieShooter/Scripts/player.gd" id="1_qphsc"]
 [ext_resource type="PackedScene" uid="uid://dtufq2hjeh1wk" path="res://microgames/ZombieShooter/Scenes/gun.tscn" id="2_0o0um"]
+[ext_resource type="AudioStream" uid="uid://1a3mpqt5k1he" path="res://microgames/ZombieShooter/Assets/SFX/ak47.mp3" id="3_kjw1w"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qphsc"]
 
@@ -47,7 +48,8 @@ _data = {
 
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_qphsc")
-mouse_sens = 10.0
+mouse_sens = 12.0
+hit_stagger = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -62,6 +64,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 
 [node name="Gun" parent="head" instance=ExtResource("2_0o0um")]
 transform = Transform3D(-0.052264255, 0, -0.49726096, 0, 0.5, 0, 0.49726096, 0, -0.052264255, 0.26, -0.448, -0.9)
+
+[node name="ShootSFX" type="AudioStreamPlayer3D" parent="head/Gun"]
+stream = ExtResource("3_kjw1w")
+pitch_scale = 2.0
 
 [node name="Camera3D" type="Camera3D" parent="head"]
 

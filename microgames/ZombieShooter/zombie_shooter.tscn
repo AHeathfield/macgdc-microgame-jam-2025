@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://3i5s37pnwpwc"]
+[gd_scene load_steps=32 format=3 uid="uid://3i5s37pnwpwc"]
 
 [ext_resource type="Script" uid="uid://cqwucx826k1ne" path="res://microgames/ZombieShooter/zombie_shooter.gd" id="1_7towe"]
 [ext_resource type="PackedScene" uid="uid://ddhoio73023ba" path="res://scenes/main/bomb_timer/bomb_timer.tscn" id="2_pntch"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bf384j516wn4x" path="res://microgames/ZombieShooter/Scripts/radar.gd" id="6_1qt1e"]
 [ext_resource type="Texture2D" uid="uid://dt5n6wr30lga1" path="res://microgames/ZombieShooter/Assets/radar_player.png" id="8_6f18p"]
 [ext_resource type="PackedScene" uid="uid://bmmh1xkdgohsm" path="res://microgames/ZombieShooter/Scenes/radar_enemy.tscn" id="9_6f18p"]
+[ext_resource type="AudioStream" uid="uid://h0b68tq4oj7u" path="res://microgames/ZombieShooter/Assets/SFX/josh.mp3" id="14_wvdly"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_a21eq"]
 viewport_path = NodePath("SubViewport")
@@ -182,11 +183,11 @@ process_mode = 1
 script = ExtResource("1_7towe")
 game_name = "Zombie Shooter"
 creator_name = "Aidan"
-game_description = "Don't let the zombies kill you."
+game_description = "Run and shoot! Don't let the zombies kill you."
 game_length = 10
 post_game_time = 2.0
 lose_on_timeout = false
-message = "Survive!"
+message = "Run and shoot! Don't let the zombies kill you."
 control_type = 2
 bomb_timer = NodePath("BombTimer")
 
@@ -197,6 +198,7 @@ texture = SubResource("ViewportTexture_a21eq")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 canvas_item_default_texture_filter = 0
+audio_listener_enable_3d = true
 size = Vector2i(640, 360)
 
 [node name="World" type="Node3D" parent="SubViewport"]
@@ -1050,7 +1052,6 @@ wait_time = 0.3
 autostart = true
 
 [node name="player" parent="SubViewport/World" groups=["player"] instance=ExtResource("3_1rkq4")]
-hit_stagger = 10.0
 
 [node name="StrongZombies" type="Node3D" parent="SubViewport/World"]
 
@@ -1211,6 +1212,11 @@ text = "You Died"
 libraries = {
 &"": SubResource("AnimationLibrary_xtk10")
 }
+
+[node name="BackgroundSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_wvdly")
+volume_db = 15.0
+autoplay = true
 
 [node name="BombTimer" parent="." instance=ExtResource("2_pntch")]
 position = Vector2(67, 354)
